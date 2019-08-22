@@ -15,12 +15,3 @@
     <%= @total_category_number %>
   </span>
 </a>
-
-  <div>
-    <% User.all.each do |u| %>
-      <h3> User ID: <%= u.id %> </h3>
-      <h2>
-        <%= u.name %> <%= u.first_name %> <%= u.last_name %> <%= u.password_digest %>
-      </h2>
-    <% end %>
-  </div>
