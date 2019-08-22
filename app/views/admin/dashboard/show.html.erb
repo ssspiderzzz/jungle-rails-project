@@ -2,7 +2,7 @@
 
 <br>
 
-<a href="/admin/products" class="list-group-item list-group-item-success">Current total number of products in the database: 
+<a href="/admin/products" class="list-group-item list-group-item-success">Current total number of products: 
   <span class="label label-success">
     <%= @total_product_number %>
   </span>
@@ -10,8 +10,17 @@
 
 <br>
 
-<a href="/admin/categories" class="list-group-item list-group-item-info">Current total number of categories in the database: 
+<a href="/admin/categories" class="list-group-item list-group-item-info">Current total number of categories: 
   <span class="label label-info">
     <%= @total_category_number %>
   </span>
 </a>
+
+  <div>
+    <% User.all.each do |u| %>
+      <h3> User ID: <%= u.id %> </h3>
+      <h2>
+        <%= u.name %> <%= u.first_name %> <%= u.last_name %> <%= u.password_digest %>
+      </h2>
+    <% end %>
+  </div>
