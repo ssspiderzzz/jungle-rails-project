@@ -31,5 +31,19 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Last name can't be blank")
       expect(@user).to_not be_valid
     end
+    it 'is not valid without email' do
+      @user = User.new(first_name: 'Spider', last_name: 'Z', password: '123', password_confirmation: '123')
+      @user.save
+      expect(@user.errors.full_messages).to include("Email can't be blank")
+      expect(@user).to_not be_valid
+    end
+    it 'is not valid if email exists' do
+      @user1 = User.new(first_name: 'Spider', last_name: 'Z', email: 'spider@gmail.com', password: '123', password_confirmation: '123')
+      @user1.save
+      @user2 = User.new(first_name: 'Spider', last_name: 'Z', email: 'spider@gmail.com', password: '123', password_confirmation: '123')
+      @user2.save
+      expect(@user2.errors.full_messages).to include("Email has already been taken")
+      expect(@user2).to_not be_valid
+    end
   end
 end
