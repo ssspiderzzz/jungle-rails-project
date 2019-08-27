@@ -56,5 +56,22 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '.authenticate_with_credentials' do
+    it 'should authenticate when email and password matches existing user' do
+      @user = User.new(first_name: 'Spider', last_name: 'Z', email: 'spider@gmail.com', password: '123', password_confirmation: '123')
+      @user.save!
+      expect(@user.authenticate_with_credentials('spider@gmail.com', '123')).to eql(@user)
+    end 
+    it 'should authenticate when email with spaces at start and end' do
+      @user = User.new(first_name: 'Spider', last_name: 'Z', email: 'spider@gmail.com', password: '123', password_confirmation: '123')
+      @user.save!
+      expect(@user.authenticate_with_credentials('  spider@gmail.com  ', '123')).to eql(@user)
+    end 
+    it 'should authenticate when email with uppercase' do
+      @user = User.new(first_name: 'Spider', last_name: 'Z', email: 'spider@gmail.com', password: '123', password_confirmation: '123')
+      @user.save!
+      expect(@user.authenticate_with_credentials('SpiDER@gmail.com', '123')).to eql(@user)
+    end 
+  end
 
 end

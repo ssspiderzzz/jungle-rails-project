@@ -9,4 +9,13 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
   validates :password_digest, presence: true
+
+  def authenticate_with_credentials(email, password)
+    if User.find_by(email: email.downcase.strip).try(:authenticate, password)
+      @user = User.find_by_email(email.downcase.strip)
+    else
+      nil
+    end
+  end
+
 end
