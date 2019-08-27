@@ -26,7 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'puma'
+gem 'puma', '~> 3.8.0' 
 
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'font-awesome-rails'
@@ -58,4 +58,10 @@ end
 group :production do
   gem 'newrelic_rpm'
   gem 'rails_12factor'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
